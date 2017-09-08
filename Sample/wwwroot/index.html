@@ -7,17 +7,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            let http = new signalR.HttpConnection('http://' + document.location.host + '/chat');
-            let connection = new signalR.HubConnection(http);
+            var http = new signalR.HttpConnection(document.location.protocol + '//' + document.location.host + '/chat');
+            var connection = new signalR.HubConnection(http);
 
             connection.on('Send', data => {
-                let child = document.createElement('li');
+                var child = document.createElement('li');
                 child.innerText = data;
                 document.getElementById('messages').appendChild(child);
             });
 
             document.getElementById('sendmessage').addEventListener('submit', event => {
-                let data = document.getElementById('data').value;
+                var data = document.getElementById('data').value;
                 connection.invoke('Send', data);
                 event.preventDefault();
             });
